@@ -4,22 +4,24 @@
 // 3* caso de testes- dados de entrada e saida 
 // 4* ambiente de teste- como e onde serão desenvolvidos ( fluxo )
 
-import { filterPokemonListAZ } from './estatistica.eventos.js';
+//escolher a unidade a ser testada// comportamento esperado//
 
-describe('filterPokemonListAZ', () => {
-  it('filters the Pokémon list in A-Z order', () => {
-    const pokemonList = [
-      { name: 'Charizard' },
-      { name: 'Bulbasaur' },
-      { name: 'Pikachu' },
+import { filteredList } from '../';
+
+describe('filteredList', () => {
+  it('filtra a lista de Pokémon na ordem A-Z', () => {
+    const pokemon_List = [
+      { name: 'abomasnow' },
+      { name: 'abra' },
+      { name: 'absol' },
     ];
 
-    const filteredList = filterPokemonListAZ(pokemonList);
+    const filteredList = displayPokemonList(pokemon_List);
 
     expect(filteredList).toEqual([
-      { name: 'Bulbasaur' },
-      { name: 'Charizard' },
-      { name: 'Pikachu' },
+      { name: 'abomasnow' },
+      { name: 'abra' },
+      { name: 'absol' },
     ]);
   });
 });
