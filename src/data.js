@@ -5,29 +5,16 @@ export const fetchPokemon = async (pokemon) => {
     const data = await APIResponse.json();
     return data;
   }
+
+  return null;
 };
 
-export const fetchData = async () => {
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
-  const data = await response.json();
-  return data.results;
-};
-
-
-export const renderPokemon = async (pokemonName, pokemonNumber, pokemonImage, input) => {
-  pokemonName.innerHTML = 'Loading...';
-  pokemonNumber.innerHTML = '';
-
-  const data = await fetchPokemon(input);
-
+export const atualizaçãoDasInformaçoesDosPokemons = (pokemonName, pokemonNumber, pokemonImage, data) => {
   if (data) {
     pokemonImage.style.display = 'flex';
-    pokemonName.innerHTML = data.name;
-    pokemonNumber.innerHTML = data.id;
-    pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
-    input.value = '';
-    const searchPokemon = data.id; // Definir a variável searchPokemon com o valor correto
-    addButtonPrevEventListener(searchPokemon, renderPokemon); // Adicionar o evento ao botão prev
+    pokemonName.innerHTML = data.name || 'Not found';
+    pokemonNumber.innerHTML = data.id != null ? String(data.id) : '';
+    pokemonImage.src = data.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default || '';
   } else {
     pokemonImage.style.display = 'none';
     pokemonName.innerHTML = 'Not found';
@@ -35,19 +22,44 @@ export const renderPokemon = async (pokemonName, pokemonNumber, pokemonImage, in
   }
 };
 
-export const addFormEventListener = (form, input, renderPokemon) => {
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    renderPokemon(input.value.toLowerCase());
+export const sortPokemonList = (pokemonList, sortOrder = 'a-z') => {
+  const sortedList = [...pokemonList]; // Criar uma nova cópia da lista original
+
+  sortedList.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+
+    if (sortOrder === 'a-z') {
+      return nameA.localeCompare(nameB);
+    } else if (sortOrder === 'z-a') {
+      return nameB.localeCompare(nameA);
+    }
+
+    return 0;
   });
+
+  return sortedList;
 };
 
-export const addButtonPrevEventListener = (searchPokemon, renderPokemon) => {
-  const buttonPrev = document.getElementById('buttonPrev'); // Identifique corretamente o botão prev na sua página
-  buttonPrev.addEventListener('click', () => {
+
+export const addFormEventListener = (form, input, callback) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const pokemonName = input.value.toLowerCase();
+    callback(pokemonName);
+  };
+
+  form.addEventListener('submit', handleSubmit);
+};
+
+export const addButtonPrevEventListener = (buttonPrev, searchPokemon, callback) => {
+  const handleButtonClick = () => {
     if (searchPokemon > 1) {
       const prevPokemon = searchPokemon - 1;
-      renderPokemon(prevPokemon);
+      callback(prevPokemon);
     }
-  });
+  };
+
+  buttonPrev.addEventListener('click', handleButtonClick);
 };
+
