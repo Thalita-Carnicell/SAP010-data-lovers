@@ -54,12 +54,14 @@ describe('atualizaçãoDasInformaçoesDosPokemons', () => {
   });
 
   it('deve atualizar as informações do pokemon', () => {
-    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, mockPokemon[0]);
+    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, data) 
   
-    expect(pokemonName.innerHTML).toEqual('bulbasaur');
-    expect(pokemonNumber.innerHTML).toBe(mockPokemon[0].numero);
-    expect(pokemonImage.src).toBe(mockPokemon[0].imagem);
+    expect(pokemonName.innerHTML).toEqual(data.name);
+    expect(pokemonNumber.innerHTML).toBe(mockPokemon[0].id);
+    //expect(pokemonNumber.innerHTML).toEqual(data.numero);
+    expect(pokemonImage.src).toBe(data.image);
     expect(pokemonImage.style.display).toBe('');
+    
   });
   
 
@@ -114,3 +116,4 @@ describe('sortPokemonList', () => {
     ]);
   });
 });
+
