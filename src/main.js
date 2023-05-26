@@ -59,3 +59,8 @@ buttonNext.addEventListener('click', handleNextButtonClick);
 atualizaçãoDasInformaçoesDosPokemons(searchPokemon);
 
 export { atualizaçãoDasInformaçoesDosPokemons };
+
+//
+//
+//
+//

@@ -2,26 +2,37 @@
 const mockPokemon = [
   {
     name: "bulbasaur",
-    number : "1",
+    id : "1",
     tipo: ["grama", "veneno"],
-    image: "https://www.serebii.net/pokemongo/pokemon/001.png",
+    sprites: {
+      versions:{
+        'generation-v':{
+          'black-white':{
+            animated:{
+              front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
+            }
+          }
+
+        }
+      }
+    }
   },
+
   {
     name: "blastoise",
-    number : "9",
+    id : "9",
     tipo: ["água"],
     image: "https://www.serebii.net/pokemongo/pokemon/009.png",
   },
   {
     name: "lickitung",
-    number : "108",
+    id : "108",
     tipo: ["normal"],
     image: "https://www.serebii.net/pokemongo/pokemon/108.png",
   },
 ];
 
 export { mockPokemon };
-
 
 
 
