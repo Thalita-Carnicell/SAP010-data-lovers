@@ -7,7 +7,7 @@ const pokemon_List = document.querySelector('.pokemon_list');
 let pokemonList = [];
 
 fetchData().then(data => {
-  
+
   pokemonList = data.map(pokemon => {
     return {
       name: pokemon.name,
@@ -73,11 +73,7 @@ function sortPokemonList() {
   // exibe a lista de pokémons classificada
   displayPokemonList(filteredList);
 }
-//
-//
 
-//
-//
 
 // Função para filtrar a lista de pokémons
 function atualizaçãoDasInformaçoesDosPokemons() {
@@ -119,3 +115,6 @@ function calcularTipoPorcentagem(types) {
 
 document.querySelector('.btn1').addEventListener('click', sortPokemonList);
 document.querySelector('.btn2').addEventListener('click', atualizaçãoDasInformaçoesDosPokemons);
+
+
+

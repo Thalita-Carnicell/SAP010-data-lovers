@@ -15,12 +15,14 @@ export const atualizaçãoDasInformaçoesDosPokemons = (pokemonName, pokemonNumb
     pokemonName.innerHTML = data.name || 'Not found';
     pokemonNumber.innerHTML = data.id != null ? String(data.id) : '';
     pokemonImage.src = data.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default || '';
-  } else {
+
+ } else {
     pokemonImage.style.display = 'none';
     pokemonName.innerHTML = 'Not found';
     pokemonNumber.innerHTML = '';
   }
 };
+
 
 export const sortPokemonList = (pokemonList, sortOrder = 'a-z') => {
   const sortedList = [...pokemonList]; // Criar uma nova cópia da lista original

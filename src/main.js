@@ -1,4 +1,5 @@
 import { fetchPokemon } from './data.js';
+// Puxar os elementos do HTML
 
 const pokemonName = document.querySelector('.pokemon__name');
 const pokemonNumber = document.querySelector('.pokemon__number');
@@ -11,6 +12,7 @@ const buttonNext = document.querySelector('.btn-next');
 
 let searchPokemon = 1;
 
+
 const atualizaçãoDasInformaçoesDosPokemons = async (pokemon) => {
   pokemonName.innerHTML = 'Loading...';
   pokemonNumber.innerHTML = '';
@@ -22,16 +24,14 @@ const atualizaçãoDasInformaçoesDosPokemons = async (pokemon) => {
     pokemonName.innerHTML = data.name;
     pokemonNumber.innerHTML = data.id;
     pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
-
     input.value = '';
     searchPokemon = data.id;
   } else {
     pokemonImage.style.display = 'none';
     pokemonName.innerHTML = 'Not found';
     pokemonNumber.innerHTML = '';
-
-
   }
+
 };
 
 const handleFormSubmit = (event) => {
@@ -52,6 +52,7 @@ const handleNextButtonClick = () => {
 };
 
 form.addEventListener('submit', handleFormSubmit);
+
 buttonPrev.addEventListener('click', handlePrevButtonClick);
 buttonNext.addEventListener('click', handleNextButtonClick);
 
