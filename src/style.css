@@ -58,6 +58,7 @@ a {
   display: inline-block;
   width: 100%;
   margin: 0%;
+  max-width: 1500px;
 
 
 }
@@ -117,6 +118,8 @@ a {
   background-color: rgb(138, 19, 19);
   box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
   display: inline-block;
+  margin-top: 10px;
+  
 }
 
 .btn-next {
@@ -130,4 +133,5 @@ a {
   background-color: rgb(138, 19, 19);
   box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
   display: inline-block;
+  margin-top: 10px;
 }
