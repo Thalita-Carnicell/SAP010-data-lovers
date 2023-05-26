@@ -1,16 +1,119 @@
-test('pokemonName deve retornar os dados do pokemon correto', async () => {
-//(test async () => { ) é a estrutura padrão para formular um test 
+// adotar cultura de testes - qualidade(métrica) confiança e tempo ( atingir objetivos de negócio) economia de tempo e dinheiro
+// 1* analise de requisitos- funcionalidades do projeto tipos de teste
+// 2* Plano de testes- (QA)ferramentas gastos de recursos
+// 3* caso de testes- dados de entrada e saida
+// 4* ambiente de teste- como e onde serão desenvolvidos ( fluxo )
 
-  const pokemonName = 'pikachu'; // APIresponse busca e retorna as informações solicitadas  "pikachu"
-  const pokemonData = await pokemonName('pikachu');// await busca as informações de forma assincronica 
-  expect(pokemonData.name).toEqual('pikachu'); // verifica se o nome do pokemon retornado na constante pokedata é igual a pikachu / toEqual quer dizer que é igual 
-  expect(pokemonData.id).toEqual(25); //para verificar se o id do Pokémon retornado na constante pokemonData é igual a undefined / toEqual quer dizer que é igual 
+import { fetchPokemon, atualizaçãoDasInformaçoesDosPokemons,sortPokemonList } from '../src/data.js';
+import { mockPokemon } from '../src/mock.js';
+import fetchMock from 'jest-fetch-mock';
+import { JSDOM } from 'jsdom';
+
+const dom = new JSDOM();
+global.document = dom.window.document;
+
+beforeEach(() => {
+  fetchMock.resetMocks();
 });
 
-test('pokemonName deve retornar Not found quando o pokemon não é encontrado', async () => {
-  const pokemonName = 'not-found-pokemon'; // simula uma resposta da API quando a função é chamada com um Pokémon
-  const pokemonData = await pokemonName(); //é chamada assincronamente 
-  expect(pokemonData).toBeNull();
+global.fetch = fetchMock;
+
+
+describe('fetchPokemon', () => {
+  it('deve ser uma função', () => {
+    expect(typeof fetchPokemon).toBe('function');
+  });
+
+  it('deve retornar o pokemon correto quando a resposta da API for bem-sucedida', async () => {
+    fetchMock.mockResponse(JSON.stringify(mockPokemon));
+    const APIResponse = await fetchPokemon('bulbasaur');
+    expect(APIResponse).toEqual(mockPokemon);
+  });
+
+  it('deve retornar null quando a resposta da API for falha', async () => {
+    fetchMock.mockResponse('', { status: 404 });
+    const APIResponse = await fetchPokemon('unknown');
+    expect(APIResponse).toBeNull();
+  });
 });
 
-//console.log()
+describe('atualizaçãoDasInformaçoesDosPokemons', () => {
+  let pokemonName;
+  let pokemonNumber;
+  let pokemonImage;
+  const data = mockPokemon[0]; // Utiliza o primeiro objeto do mock de dados do pokemon
+
+  beforeEach(() => {
+    pokemonName = document.createElement('div');
+    pokemonNumber = document.createElement('div');
+    pokemonImage = document.createElement('img');
+  });
+
+  it('deve ser uma função', () => {
+    expect(typeof atualizaçãoDasInformaçoesDosPokemons).toBe('function');
+  });
+
+  it('deve atualizar as informações do pokemon', () => {
+    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, data) 
+  
+    expect(pokemonName.innerHTML).toEqual(data.name);
+    expect(pokemonNumber.innerHTML).toBe(mockPokemon[0].id);
+    //expect(pokemonNumber.innerHTML).toEqual(data.numero);
+    expect(pokemonImage.src).toBe(data.image);
+    expect(pokemonImage.style.display).toBe('');
+    
+  });
+  
+
+  it('deve atualizar as informações do pokemon para "Not found" quando os dados são nulos', () => {
+    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage);
+
+    expect(pokemonName.innerHTML).toBe('Not found');
+    expect(pokemonNumber.innerHTML).toBe('');
+    expect(pokemonImage.src).toBe('');
+    expect(pokemonImage.style.display).toBe('none');
+  });
+});
+
+
+describe('sortPokemonList', () => {
+
+  it('deve ser uma função', () => {
+    expect(typeof sortPokemonList).toBe('function');
+  });
+
+  it('deve retornar uma nova lista ordenada por nome de forma ascendente', () => {
+    const pokemonList = [
+      { name: 'bulbasaur', id: 1 },
+      { name: 'blastoise', id: 9 },
+      { name: 'lickitung', id: 108 }
+    ];
+
+    const sortedList = sortPokemonList(pokemonList, 'a-z');
+
+    expect(sortedList).not.toBe(pokemonList);
+    expect(sortedList).toEqual([
+      { name: 'blastoise', id: 9 },
+      { name: 'bulbasaur', id: 1 },
+      { name: 'lickitung', id: 108 }
+    ]);
+  });
+
+  it('deve retornar uma nova lista ordenada por nome de forma descendente', () => {
+    const pokemonList = [
+      { name: 'bulbasaur', id: 1 },
+      { name: 'blastoise', id: 9 },
+      { name: 'lickitung', id: 108 }
+    ];
+
+    const sortedList = sortPokemonList(pokemonList, 'z-a');
+
+    expect(sortedList).not.toBe(pokemonList);
+    expect(sortedList).toEqual([
+      { name: 'lickitung', id: 108 },
+      { name: 'bulbasaur', id: 1 },
+      { name: 'blastoise', id: 9 }
+    ]);
+  });
+});
+

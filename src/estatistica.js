@@ -1,93 +1,120 @@
+import { fetchData } from './estatistica.data.js';
+
+// Seleciona o elemento HTML com a classe pokemon_list
 const pokemon_List = document.querySelector('.pokemon_list');
+
+// Declara uma variável pokemonList como uma matriz vazia
 let pokemonList = [];
 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=500&offset=0')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Não foi possível obter a lista de Pokémon');
-    }
-    return response.json();
-  })
-  .then(data => {
-    pokemonList = data.results;
-    return Promise.all(pokemonList.map(pokemon => fetch(pokemon.url).then(res => res.json())));
-  })
-  .then(data => {
-    pokemonList = data.map(pokemon => {
-      return {
-        name: pokemon.name,
-        id: pokemon.id,
-        height: pokemon.height,
-        weight: pokemon.weight,
-        hp: pokemon.stats[0].base_stat,
-        attack: pokemon.stats[1].base_stat,
-        defense: pokemon.stats[2].base_stat,
-        speed: pokemon.stats[5].base_stat,
-        types: pokemon.types.map(type => type.type.name),
-        imageUrl: pokemon.sprites.other['official-artwork'].front_default // adicionando a URL da imagem do Pokémon
-      }
-    });
+fetchData().then(data => {
 
-    displayPokemonList(pokemonList);
-  })
-  .catch(error => {
-    console.log(error);
+  pokemonList = data.map(pokemon => {
+    return {
+      name: pokemon.name,
+      id: pokemon.id,
+      height: pokemon.height,
+      weight: pokemon.weight,
+      hp: pokemon.stats[0].base_stat,
+      attack: pokemon.stats[1].base_stat,
+      defense: pokemon.stats[2].base_stat,
+      speed: pokemon.stats[5].base_stat,
+      types: pokemon.types.map(type => type.type.name),
+      imageUrl: pokemon.sprites.other['official-artwork'].front_default
+    };
+
   });
 
-function displayPokemonList(pokemonList) {
-  pokemon_List.innerHTML = '';
+  displayPokemonList(pokemonList);
+});
+
+
+function displayPokemonList(pokemonList) { // Função para exibir a lista de pokémons no elemento HTML
+
+  pokemon_List.innerHTML = '';// Limpa o conteúdo do elemento HTML pokemon_List
+
+  // Itera sobre cada pokémon na lista de pokémons
   pokemonList.forEach(pokemon => {
-    const listItem = document.createElement('li');
+    const listItem = document.createElement('li'); // Cria um novo elemento li
+    // Preenche o conteúdo do elemento li com as informações do pokémon
     listItem.innerHTML = `
       <div class="pokemon_info">
         <h3 class="pokemon_name">${pokemon.name}</h3>
         <img src="${pokemon.imageUrl}" alt="${pokemon.name}">
         <p>name: ${pokemon.name}</p>
-        <p>id: ${pokemon.id}</p>
+        <p>Id: ${pokemon.id}</p>
         <p>Weight: ${pokemon.weight}</p>
         <p>HP: ${pokemon.hp}</p>
         <p>Attack: ${pokemon.attack}</p>
         <p>Defense: ${pokemon.defense}</p>
         <p>Speed: ${pokemon.speed}</p>
-        <p>Types: ${pokemon.types.join(', ')}</p> 
+        <P>Eu sou: ${calcularTipoPorcentagem(pokemon.types)}</p>
       </div>
-    `; 
-    pokemon_List.appendChild(listItem);
+    `;
+
+    pokemon_List.appendChild(listItem); // Adiciona o elemento li ao elemento HTML pokemon_List
   });
 }
 
-const ordenarPorElement = document.querySelector('#options1');
-const tipoPokemonElement = document.querySelector('#TipoPokemon');
+// função para classificar a lista de pokémons
+function sortPokemonList() {
 
-const btn1 = document.querySelector('.btn1');
-const btn2 = document.querySelector('#btn2');
+  const filteredList = [...pokemonList];// Cria uma cópia da lista de pokémons
 
-btn1.addEventListener('click', () => { //evento
-  let filteredList = [...pokemonList]; // armazenar copia da lista no filteredList usando o operador spread 
-  const orderValue = ordenarPorElement.value; //pega o valor selecionado do ordenarPorElement e guarda o valor na variavel orderValue
-  
-  if (orderValue === 'a-z') { // se for selecionado A-Z ele executa o if se for de de Z-A ele executa o codigo else
 
-    filteredList.sort((a, b) => a.name.localeCompare(b.name)); 
-    //nome da lista + sort() metodo que classifica elementos e array + (a,B) elemento de comparação + a.name  primeiro elemento a ser comparado + localeCompare() método da string que compara duas strings localizadas e retorna um valor numérico com base na ordem de classificação. 
+  const orderValue = document.querySelector('#options1').value;  // valor selecionado do elemento HTML options1
+
+  // classifica a lista de pokémons com base no valor selecionado
+  if (orderValue === 'a-z') {
+    filteredList.sort((a, b) => a.name.localeCompare(b.name));
   } else if (orderValue === 'z-a') {
     filteredList.sort((a, b) => b.name.localeCompare(a.name));
   }
-  
+
+  // exibe a lista de pokémons classificada
   displayPokemonList(filteredList);
-});
+}
 
 
-btn2.addEventListener('click', () => {
+// Função para filtrar a lista de pokémons
+function atualizaçãoDasInformaçoesDosPokemons() {
+
   let filteredList = [...pokemonList];
-  
-  const typeValue = tipoPokemonElement.value;
-  
+
+  // Obtém o valor selecionado do elemento HTML TipoPokemon
+  const typeValue = document.querySelector('#TipoPokemon').value;
+
+  // Filtra a lista de pokémons com base no tipo selecionado
   if (typeValue) {
     filteredList = filteredList.filter(pokemon => pokemon.types.includes(typeValue));
   }
-  
-  displayPokemonList(filteredList);
 
-});
+  // Exibe a lista de pokémons filtrada
+  displayPokemonList(filteredList);
+}
+
+function calcularTipoPorcentagem(types) {
+  const typeCounts = {}; //typeCounts objeto vazio para armazenar os dados de cada tipo
+  const totalPokemon = types.length; //número total de pokemon na variável / length comp. do array
+
+  types.forEach(type => { //intera sobre cada tipo presente no array "type"
+    typeCounts[type] = (typeCounts[type] || 0) + 1;
+    // typeCounts, incrementando em 1 o número de ocorrências do tipo de Pokémon atual (type). Se o tipo ainda não existe em typeCounts, é atribuído o valor 0 antes de incrementar.
+  });
+
+  let typePercentageHTML = '';
+
+  for (const type in typeCounts) {
+    const percentage = (typeCounts[type] / totalPokemon) * 100;
+    typePercentageHTML += `${percentage.toFixed()}%:${type}`;
+  }
+
+  return typePercentageHTML;
+
+}
+
+
+document.querySelector('.btn1').addEventListener('click', sortPokemonList);
+document.querySelector('.btn2').addEventListener('click', atualizaçãoDasInformaçoesDosPokemons);
+
+
 
