@@ -54,16 +54,13 @@ describe('atualizaçãoDasInformaçoesDosPokemons', () => {
   });
 
   it('deve atualizar as informações do pokemon', () => {
-    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, data) 
-  
-    expect(pokemonName.innerHTML).toEqual(data.name);
-    expect(pokemonNumber.innerHTML).toBe(mockPokemon[0].id);
-    //expect(pokemonNumber.innerHTML).toEqual(data.numero);
-    expect(pokemonImage.src).toBe(data.image);
-    expect(pokemonImage.style.display).toBe('');
-    
+    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, 'bulbasaur');
+
+    expect(pokemonName.innerHTML).toEqual(mockPokemon[0].name);
+    expect(pokemonNumber.innerHTML).toEqual(String(mockPokemon[0].number));
+    expect(pokemonImage.src).toEqual(mockPokemon[0].image);
+    expect(pokemonImage.style.display).toEqual('');
   });
-  
 
   it('deve atualizar as informações do pokemon para "Not found" quando os dados são nulos', () => {
     atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage);
