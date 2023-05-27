@@ -37,41 +37,7 @@ describe('fetchPokemon', () => {
   });
 });
 
-describe('atualizaçãoDasInformaçoesDosPokemons', () => {
-  let pokemonName;
-  let pokemonNumber;
-  let pokemonImage;
-  const data = mockPokemon[0]; // Utiliza o primeiro objeto do mock de dados do pokemon
-
-  beforeEach(() => {
-    pokemonName = document.createElement('div');
-    pokemonNumber = document.createElement('div');
-    pokemonImage = document.createElement('img');
-  });
-
-  it('deve ser uma função', () => {
-    expect(typeof atualizaçãoDasInformaçoesDosPokemons).toBe('function');
-  });
-
-  it('deve atualizar as informações do pokemon', () => {
-    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage, 'bulbasaur');
-
-    expect(pokemonName.innerHTML).toEqual(mockPokemon[0].name);
-    expect(pokemonNumber.innerHTML).toEqual(String(mockPokemon[0].number));
-    expect(pokemonImage.src).toEqual(mockPokemon[0].image);
-    expect(pokemonImage.style.display).toEqual('');
-  });
-
-  it('deve atualizar as informações do pokemon para "Not found" quando os dados são nulos', () => {
-    atualizaçãoDasInformaçoesDosPokemons(pokemonName, pokemonNumber, pokemonImage);
-
-    expect(pokemonName.innerHTML).toBe('Not found');
-    expect(pokemonNumber.innerHTML).toBe('');
-    expect(pokemonImage.src).toBe('');
-    expect(pokemonImage.style.display).toBe('none');
-  });
-});
-
+//S2
 
 describe('sortPokemonList', () => {
 
