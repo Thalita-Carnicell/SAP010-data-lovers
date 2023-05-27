@@ -1,6 +1,6 @@
 import { fetchPokemon } from './data.js';
-
 // Puxar os elementos do HTML
+
 const pokemonName = document.querySelector('.pokemon__name');
 const pokemonNumber = document.querySelector('.pokemon__number');
 const pokemonImage = document.querySelector('.pokemon__image');
@@ -12,8 +12,8 @@ const buttonNext = document.querySelector('.btn-next');
 
 let searchPokemon = 1;
 
-// renderizar as informações do Pokémon
-const displayPokemon = async (pokemon) => {
+
+const atualizaçãoDasInformaçoesDosPokemons = async (pokemon) => {
   pokemonName.innerHTML = 'Loading...';
   pokemonNumber.innerHTML = '';
 
@@ -27,28 +27,41 @@ const displayPokemon = async (pokemon) => {
     input.value = '';
     searchPokemon = data.id;
   } else {
+    
     pokemonImage.style.display = 'none';
     pokemonName.innerHTML = 'Not found';
     pokemonNumber.innerHTML = '';
   }
-}
 
-// Eventos do botão
-form.addEventListener('submit', (event) => {
+};
+
+const handleFormSubmit = (event) => {
   event.preventDefault();
-  displayPokemon(input.value.toLowerCase());
-});
+  atualizaçãoDasInformaçoesDosPokemons(input.value.toLowerCase());
+};
 
-buttonPrev.addEventListener('click', () => {
+const handlePrevButtonClick = () => {
   if (searchPokemon > 1) {
     searchPokemon -= 1;
-    displayPokemon(searchPokemon);
+    atualizaçãoDasInformaçoesDosPokemons(searchPokemon);
   }
-});
+};
 
-buttonNext.addEventListener('click', () => {
+const handleNextButtonClick = () => {
   searchPokemon += 1;
-  displayPokemon(searchPokemon);
-});
+  atualizaçãoDasInformaçoesDosPokemons(searchPokemon);
+};
 
-displayPokemon(searchPokemon);
+form.addEventListener('submit', handleFormSubmit);
+
+buttonPrev.addEventListener('click', handlePrevButtonClick);
+buttonNext.addEventListener('click', handleNextButtonClick);
+
+atualizaçãoDasInformaçoesDosPokemons(searchPokemon);
+
+export { atualizaçãoDasInformaçoesDosPokemons };
+
+//
+//
+//
+//

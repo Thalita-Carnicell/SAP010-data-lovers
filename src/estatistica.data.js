@@ -15,3 +15,5 @@ export function fetchData() {
       return Promise.all(pokemonList.map(pokemon => fetch(pokemon.url).then(res => res.json())));
     });
 }
+
+

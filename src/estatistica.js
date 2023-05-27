@@ -74,8 +74,9 @@ function sortPokemonList() {
   displayPokemonList(filteredList);
 }
 
+
 // Função para filtrar a lista de pokémons
-function filterPokemonList() {
+function atualizaçãoDasInformaçoesDosPokemons() {
 
   let filteredList = [...pokemonList];
 
@@ -113,4 +114,7 @@ function calcularTipoPorcentagem(types) {
 
 
 document.querySelector('.btn1').addEventListener('click', sortPokemonList);
-document.querySelector('.btn2').addEventListener('click', filterPokemonList);
+document.querySelector('.btn2').addEventListener('click', atualizaçãoDasInformaçoesDosPokemons);
+
+
+

@@ -1,4 +1,4 @@
-@import url('https://fonts.google.com/specimen/Oxanium?query=oxanium');
+
 
 * {
   margin: 0;
@@ -49,7 +49,6 @@ a {
 .pokebola {
   width: 100%;
   max-width: 425px;
-
 }
 
 
@@ -89,6 +88,8 @@ a {
 
 }
 
+
+
 .form {
   width: 65%;
   display: inline-block;
@@ -99,7 +100,7 @@ a {
   width: 100%;
   padding: 4%;
   outline: none;
-  border: 2px solid #333;
+  border: 3px solid #333;
   border-radius: 5px;
   font-weight: 600;
   color: #3a444d;
@@ -119,7 +120,6 @@ a {
   box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
   display: inline-block;
   margin-top: 10px;
-  
 }
 
 .btn-next {

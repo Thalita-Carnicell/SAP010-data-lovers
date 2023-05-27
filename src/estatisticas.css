@@ -56,8 +56,37 @@ body {
   min-height: 100vh;
   display: inline-block;
   width: 100%;
+
 }
 
+
+.filtrePokemon{
+  color:rgb(138, 19, 19);
+  font-size:50px;
+  width: 100%;
+  text-align: center;
+}
+
+
+.ordenarPor{
+color: rgb(138, 19, 19);
+font-size:25px;
+
+}
+
+.tipoPokemon{
+color: rgb(138, 19, 19);
+font-size:25px;
+
+}
+
+body {
+  text-align: center;
+  background:linear-gradient(to bottom,#797575,#3b3a3a );
+min-height: 100vh;
+display:inline-block;
+ width: 100%;
+}
 .pokemon_list {
   display: flex;
   flex-wrap: wrap;
@@ -101,6 +130,7 @@ body {
   text-align: center;
 }
 
+
 .btn1 {
   /*do botão pesquisar a-z*/
   padding: 10px;
@@ -113,15 +143,16 @@ body {
   cursor: pointer;
 }
 
+
 .btn2 {
-  /*do botão pesquisar tipo*/
   padding: 10px;
   font-size: 16px;
   border: 1px solid #111111;
   border-radius: 4px;
   margin-right: 10px;
-  background-color: rgb(138, 19, 19);
+  background-color:rgb(138, 19, 19);
   color: #aaa;
   cursor: pointer;
   margin-top: 5px;
 }
+
