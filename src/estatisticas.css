@@ -83,7 +83,7 @@ font-size:25px;
 body {
   text-align: center;
   background:linear-gradient(to bottom,#797575,#3b3a3a );
-min-height: 100vh;
+ min-height: 100vh;
 display:inline-block;
  width: 100%;
 }
