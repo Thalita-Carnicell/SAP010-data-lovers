@@ -56,7 +56,6 @@ body {
   min-height: 100vh;
   display: inline-block;
   width: 100%;
-  font-family: 'Oxanium', cursive;
 }
 
 
@@ -69,23 +68,23 @@ body {
 
 
 .ordenarPor{
-color: rgb(138, 19, 19);
-font-size:25px;
+ color: rgb(138, 19, 19);
+ font-size:25px;
 
 }
 
 .tipoPokemon{
-color: rgb(138, 19, 19);
-font-size:25px;
+ color: rgb(138, 19, 19);
+ font-size:25px;
 
 }
 
 body {
   text-align: center;
   background:linear-gradient(to bottom,#797575,#3b3a3a );
- min-height: 100vh;
-display:inline-block;
- width: 100%;
+  min-height: 100vh;
+  display:inline-block;
+  width: 100%;
 }
 .pokemon_list {
   display: flex;
@@ -156,8 +155,13 @@ display:inline-block;
   margin-top: 5px;
 }
 
-@media screen and (max-width:470px){
+@media screen and (max-width:500px){
   .filtrePokemon {
-      font-size: 20px;
+      font-size: 30px;
+  }
+}
+@media screen and (max-width:365px){
+  .btn1, .btn2 {
+      font-size: 10px;
   }
 }
