@@ -72,7 +72,7 @@ a {
 
 .pokemon__data {
   font-weight: 600;
-  color: #aaa;
+  color: #aaaaaa;
   top: 75%;
   right: 33%;
   font-size: clamp(8px, 5vw, 25px);

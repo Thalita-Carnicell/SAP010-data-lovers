@@ -8,12 +8,12 @@
   <link rel="icon" href="pokebola.png"><!--imagem do icone do html (favicon) -->
   <title>pokemon</title>
   <link href="style.css" rel="stylesheet" type="text/css">
-  <img src="./pokedex-3d-logo.png" alt="pokemon" class="logo"><!--imagem do logo pokedex -->
-</head>
+  <img src="./pokedex-3d-logo.png" alt="imagem de uma Pokedex" class="logo"><!--imagem do logo pokedex -->
+</head><!-- alt ajuda na acessibilidade do df visual -->
 
 <body>
 
-  <nav class="nav">
+  <nav class="nav"><!--sintaxe naveção para outras paginas -->
     <div class="box">
       <a href="estatistica.html">
         <div class="escritafiltro">Filtros de pesquisa</div>
@@ -23,8 +23,8 @@
 
   <main>
     <div>
-      <img src="https://pokeapi.co/api/v2/pokemon" alt="pokemon" class="pokemon__image">
-      <img src="pokebola.png" alt="pokebola" class="pokebola">
+      <img src="https://pokeapi.co/api/v2/pokemon" alt="imagem do pokemon" class="pokemon__image">
+      <img src="pokebola.png" alt="imagem de uma pokebola aberta" class="pokebola">
     </div>
 
     <section class="pokemon__data">
@@ -34,13 +34,13 @@
 
     <form class="form">
 
-      <input type="search" id="inputSearch" class="input__search" placeholder="Nome ou Numero " required="">
+      <input type="search" id="inputSearch" class="input__search" placeholder="Nome ou Numero " required=""><!--indica que so vai realizar apos realizar o que esta dentro -->
 
     </form>
 
-    <ul class="buttons">
-      <button class="button btn-prev">Voltar &lt;</button>
-      <button class="button btn-next">Seguir &gt;</button>
+    <ul class="buttons"><!-- elemento semantico para lista desordenada/ ordenada seria OL -->
+      <button class="button btn-prev">Voltar &lt;</button><!-- "&lt;"" é um simbolo ASCII referencia para menor que  -->
+      <button class="button btn-next">Seguir &gt;</button><!-- " &gt;" é um simbolo ASCII referencia para maior que-->
     </ul>
 
   </main>
