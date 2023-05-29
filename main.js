@@ -10,7 +10,7 @@ const input = document.querySelector('.input__search');
 const buttonPrev = document.querySelector('.btn-prev');
 const buttonNext = document.querySelector('.btn-next');
 
-let searchPokemon = 1;
+let searchPokemon = 1; // Declara a varial inicializando pelo numero 1 dos pokemon
 
 
 const atualizaçãoDasInformaçoesDosPokemons = async (pokemon) => {
