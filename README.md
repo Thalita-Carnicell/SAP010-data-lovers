@@ -23,9 +23,9 @@ O Website apresenta uma interface 100% responsiva (pode ser acessado pelo celula
 
 ### 3. Histórias de usuário
 
-Usuario 1:
+Usuario 1: Adulto , 27anos, sexo feminino: Gostei do site , achei bem dinamico , consegui visualizar o pokemon . Gostei que ele se meche quando pesquiso.
 
-Usuario 2 :
+Usuario 2 : Criança , 8 anos, sexo masculino: Relatou que a cor vermelha do site chamou atenção dele , que a pokebola parecia que o pokemon ia sair da tela, gostou de navegar pelos pokenos durante pesquisa pelo numero.
 
 ### Desenho de interface do usuário
 Interface finalizada para o usuário :
