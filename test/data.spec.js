@@ -4,7 +4,7 @@
 // 3* caso de testes- dados de entrada e saida
 // 4* ambiente de teste- como e onde serão desenvolvidos ( fluxo )
 
-import { fetchPokemon, atualizaçãoDasInformaçoesDosPokemons,sortPokemonList } from '../src/data.js';
+import { fetchPokemon,sortPokemonList } from '../src/data.js';
 import { mockPokemon } from '../src/mock.js';
 import fetchMock from 'jest-fetch-mock';
 import { JSDOM } from 'jsdom';
