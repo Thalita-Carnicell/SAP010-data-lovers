@@ -16,6 +16,7 @@ body {
   min-height: 100vh;
   display: inline-block;
   width: 100%;
+  font-family: 'Oxanium', cursive;
 }
 
 main {
